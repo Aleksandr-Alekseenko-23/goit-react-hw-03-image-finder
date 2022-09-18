@@ -19,7 +19,7 @@ export class App extends Component {
     dataModal: null,
   };
 
-  componentDidUpdate = async (_, prevState) => {
+  async componentDidUpdate(_, prevState) {
     const { page, imageTitle, per_page } = this.state;
     if (prevState.page !== page || prevState.imageTitle !== imageTitle) {
       try {
@@ -35,7 +35,7 @@ export class App extends Component {
         // throw new Error(res.statusText);
       }
     }
-  };
+  }
 
   handleSearchbarSubmit = imageTitle => {
     this.setState({ imageTitle });
