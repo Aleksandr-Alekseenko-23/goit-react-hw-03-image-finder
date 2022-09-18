@@ -17,6 +17,7 @@ export class App extends Component {
     per_page: 12,
     showModal: false,
     dataModal: null,
+    error: null,
   };
 
   async componentDidUpdate(_, prevState) {
@@ -32,7 +33,7 @@ export class App extends Component {
           .then(image => this.setState({ image }))
           .finally(() => this.setState({ loading: false }));
       } catch (error) {
-        // throw new Error(res.statusText);
+        this.setState({ error });
       }
     }
   }
@@ -60,12 +61,13 @@ export class App extends Component {
   };
 
   render() {
-    const { loading, image, showModal, dataModal } = this.state;
+    const { loading, image, showModal, dataModal, error } = this.state;
     return (
       <>
         {/* <ToastContainer autoClose={3000} /> */}
         <div className={css.App}>
           <Searchbar onSubmit={this.handleSearchbarSubmit} />
+          {error && <p>Whoops, something went wrong: {error.message}</p>}
           {loading && <Loader />}
           <ImageGallery image={image} toggleModal={this.toggleModal} />
           {image && <Button onSubmit={this.loadMore} />}
