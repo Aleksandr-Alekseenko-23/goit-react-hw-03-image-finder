@@ -29,7 +29,6 @@ ImageGalleryItem.propTypes = {
   toggleModal: PropTypes.func.isRequired,
   image: PropTypes.objectOf(
     PropTypes.shape({
-      total: PropTypes.number,
       hits: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.number.isRequired,

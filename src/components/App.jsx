@@ -19,12 +19,12 @@ export class App extends Component {
     dataModal: null,
   };
 
-  componentDidUpdate(_, prevState) {
+  componentDidUpdate = async (_, prevState) => {
     const { page, imageTitle, per_page } = this.state;
     if (prevState.page !== page || prevState.imageTitle !== imageTitle) {
       try {
         this.setState({ loading: true });
-        axios
+        return await axios
           .get(
             `https:pixabay.com/api/?q=${imageTitle}&page=${page}&key=29205442-de93c714ea8b3e401a30c89a2&image_type=photo&orientation=horizontal&per_page=${per_page}`
           )
@@ -35,7 +35,7 @@ export class App extends Component {
         // throw new Error(res.statusText);
       }
     }
-  }
+  };
 
   handleSearchbarSubmit = imageTitle => {
     this.setState({ imageTitle });
