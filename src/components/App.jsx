@@ -12,7 +12,7 @@ import { API } from '../API/API.js';
 export class App extends Component {
   state = {
     imageTitle: '',
-    image: null,
+    image: [],
     loading: false,
     page: 1,
     per_page: 12,
@@ -27,8 +27,7 @@ export class App extends Component {
       try {
         this.setState({ loading: true });
         const response = await API(imageTitle, page, per_page);
-        console.log(response);
-        this.setState({ image: response });
+        this.setState({ image: response.hits });
       } catch (error) {
         this.setState({ error });
       } finally {
@@ -69,7 +68,7 @@ export class App extends Component {
           {error && <p>Whoops, something went wrong: {error.message}</p>}
           {loading && <Loader />}
           <ImageGallery image={image} toggleModal={this.toggleModal} />
-          {image && <Button onSubmit={this.loadMore} />}
+          {!!image.length && <Button onSubmit={this.loadMore} />}
           {showModal && (
             <Modal dataModal={dataModal} toggleModal={this.toggleModal} />
           )}

@@ -24,7 +24,6 @@ export class Modal extends Component {
   };
 
   render() {
-    console.log(this.props.dataModal);
     const { src, title } = this.props.dataModal;
 
     return (
@@ -42,10 +41,8 @@ export default Modal;
 
 Modal.propTypes = {
   toggleModal: PropTypes.func.isRequired,
-  dataModal: PropTypes.objectOf(
-    PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  dataModal: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }),
 };

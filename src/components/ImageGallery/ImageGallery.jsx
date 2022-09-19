@@ -15,16 +15,12 @@ export default ImageGallery;
 
 ImageGallery.propTypes = {
   toggleModal: PropTypes.func.isRequired,
-  image: PropTypes.objectOf(
+  image: PropTypes.arrayOf(
     PropTypes.shape({
-      hits: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          tags: PropTypes.string.isRequired,
-          webformatURL: PropTypes.string.isRequired,
-          largeImageURL: PropTypes.string.isRequired,
-        })
-      ).isRequired,
+      id: PropTypes.number.isRequired,
+      tags: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
 };
