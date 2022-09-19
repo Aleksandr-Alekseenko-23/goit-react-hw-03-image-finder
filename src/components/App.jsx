@@ -5,8 +5,9 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
 import css from './App.module.css';
-import axios from 'axios';
+
 import Modal from './Modal/Modal';
+import { API } from '../API/API.js';
 
 export class App extends Component {
   state = {
@@ -25,15 +26,13 @@ export class App extends Component {
     if (prevState.page !== page || prevState.imageTitle !== imageTitle) {
       try {
         this.setState({ loading: true });
-        return await axios
-          .get(
-            `https:pixabay.com/api/?q=${imageTitle}&page=${page}&key=29205442-de93c714ea8b3e401a30c89a2&image_type=photo&orientation=horizontal&per_page=${per_page}`
-          )
-          .then(res => res.data)
-          .then(image => this.setState({ image }))
-          .finally(() => this.setState({ loading: false }));
+        const response = await API(imageTitle, page, per_page);
+        console.log(response);
+        this.setState({ image: response });
       } catch (error) {
         this.setState({ error });
+      } finally {
+        this.setState({ loading: false });
       }
     }
   }
