@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
@@ -62,7 +63,7 @@ export class App extends Component {
     const { loading, image, showModal, dataModal, error } = this.state;
     return (
       <>
-        {/* <ToastContainer autoClose={3000} /> */}
+        <ToastContainer autoClose={3000} />
         <div className={css.App}>
           <Searchbar onSubmit={this.handleSearchbarSubmit} />
           {error && <p>Whoops, something went wrong: {error.message}</p>}

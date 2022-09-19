@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import css from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 
@@ -15,8 +15,7 @@ export class Searchbar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.imageTitle.trim() === '') {
-      alert('Введите название картинки!');
-      //   toast.error('Введите название картинки!');
+      toast.error('Введите название картинки!');
       return;
     }
     this.props.onSubmit(this.state.imageTitle);
