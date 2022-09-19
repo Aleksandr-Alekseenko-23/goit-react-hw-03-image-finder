@@ -11,20 +11,18 @@ export class Modal extends Component {
     window.removeEventListener('keydown', this.handleKeydown);
   }
 
-  handleKeydown = event => {
-    if (event.code === 'Escape') {
-      this.props.toggleModal();
-    }
+  handleKeydown = ({ code }) => {
+    if (code === 'Escape') this.props.toggleModal();
   };
 
-  handleOverlayClick = event => {
-    if (event.currentTarget === event.target) {
-      this.props.toggleModal();
-    }
+  handleOverlayClick = ({ target, currentTarget }) => {
+    if (currentTarget === target) this.props.toggleModal();
   };
 
   render() {
-    const { src, title } = this.props.dataModal;
+    const {
+      dataModal: { src, title },
+    } = this.props;
 
     return (
       <div className={css.Overlay} onClick={this.handleOverlayClick}>

@@ -3,24 +3,22 @@ import css from './ImageGalleryItem.module.css';
 import PropTypes from 'prop-types';
 
 function ImageGalleryItem({ image, toggleModal }) {
-  if (image) {
-    return image.map(item => {
+    return image.map(({ id, largeImageURL, tags, webformatURL }) => {
       return (
         <li
-          key={item.id}
+          key={id}
           className={css.ImageGalleryItem}
           onClick={() =>
             toggleModal({
-              src: item.largeImageURL,
-              title: item.tags,
+              src: largeImageURL,
+              title: tags,
             })
           }
         >
-          <img src={item.webformatURL} alt={item.tags} />
+          <img src={webformatURL} alt={tags} />
         </li>
       );
     });
-  }
 }
 
 export default ImageGalleryItem;

@@ -8,8 +8,8 @@ export class Searchbar extends Component {
     imageTitle: '',
   };
 
-  handleTitleChange = event => {
-    this.setState({ imageTitle: event.currentTarget.value.toLowerCase() });
+  handleTitleChange = ({currentTarget:{value}}) => {
+    this.setState({ imageTitle:value.toLowerCase() });
   };
 
   handleSubmit = event => {

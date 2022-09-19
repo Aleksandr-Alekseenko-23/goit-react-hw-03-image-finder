@@ -27,7 +27,9 @@ export class App extends Component {
       try {
         this.setState({ loading: true });
         const response = await API(imageTitle, page, per_page);
-        this.setState({ image: response.hits });
+        this.setState(prevState => ({
+          image: [...prevState.image, ...response.hits],
+        }));
       } catch (error) {
         this.setState({ error });
       } finally {
@@ -37,17 +39,16 @@ export class App extends Component {
   }
 
   handleSearchbarSubmit = imageTitle => {
-    this.setState({ imageTitle });
     this.setState({
       page: 1,
       per_page: 12,
+      imageTitle,
     });
   };
 
   loadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
-      per_page: prevState.per_page + 12,
     }));
   };
 
@@ -66,9 +67,9 @@ export class App extends Component {
         <div className={css.App}>
           <Searchbar onSubmit={this.handleSearchbarSubmit} />
           {error && <p>Whoops, something went wrong: {error.message}</p>}
-          {loading && <Loader />}
           <ImageGallery image={image} toggleModal={this.toggleModal} />
-          {!!image.length && <Button onSubmit={this.loadMore} />}
+          {loading && <Loader />}
+          {image.length ? <Button onSubmit={this.loadMore} /> : ''}
           {showModal && (
             <Modal dataModal={dataModal} toggleModal={this.toggleModal} />
           )}
